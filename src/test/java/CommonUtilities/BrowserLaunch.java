@@ -13,7 +13,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class BrowserLaunch {
+public class BrowserLaunch extends ExcelUtil{
 	public static WebDriverWait wait;
 
 	public enum DriverType {
@@ -31,7 +31,7 @@ public class BrowserLaunch {
 		}
 	}
 
-	public static WebDriver driver;
+	public static  WebDriver driver;
 
 	public static WebDriver getDriver(DriverType driverType, boolean headless) {
 
@@ -79,9 +79,9 @@ public class BrowserLaunch {
 	}
 
 	public static void setBrowserToLaunch(DriverType BrowserName, boolean headless, String URL) {
-		getDriver(BrowserName, headless);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		driver = getDriver(BrowserName, headless);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.parseInt(CommonMethods.getProperty("config", "WaitTime"))));
+		wait = new WebDriverWait(driver,Duration.ofSeconds(Integer.parseInt(CommonMethods.getProperty("config", "WaitTime"))));
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.get(URL);

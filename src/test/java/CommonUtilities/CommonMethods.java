@@ -3,6 +3,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import com.codoid.products.fillo.*;
 
 public class CommonMethods {
 	    private static Properties properties = new Properties();
@@ -22,6 +23,20 @@ public class CommonMethods {
 	      loadProperties(path);
 	     String property =  properties.getProperty(propertyName);
 	     return property;
+	    }
+	    
+	    public static Recordset createExcelRecordset(String strQuery,String excelWorkbookPath) {
+	    	Recordset recordset = null;
+	    	Connection connection = null;
+	    	try {
+	    		Fillo file = new Fillo();
+	    		connection = file.getConnection(excelWorkbookPath);
+	    		recordset = connection.executeQuery(strQuery);
+	    		recordset.moveFirst();
+	    	}catch(Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    	return recordset;
 	    }
 
 	}
