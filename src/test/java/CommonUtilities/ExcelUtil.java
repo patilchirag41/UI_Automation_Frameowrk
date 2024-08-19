@@ -11,14 +11,14 @@ public class ExcelUtil {
 	public static String InputDataSheetPath = null;
 
 	public static Recordset getTestData(String TestCaseID) {
-		InputDataWorkbook = CommonMethods.getProperty("config", "InputDataWorkBookName");
+		InputDataWorkbook = CommonMethods.getProperty("config", "InputDataWorkbook");
 		InputDataSheetPath = "src/test/resources/Test Data/" + InputDataWorkbook + ".xlsx";
-		if (TestCaseID.startsWith("Registartion")) {
+		if (TestCaseID.startsWith("Registration")) {
 			sheetName = CommonMethods.getProperty("config", "sheetName_Registration");
 		} else
 			System.err.println("INVALID SHEET NAME");
 
-		String strQuery = "Select * from" + sheetName + "WHERE TestCaseID =" + TestCaseID;
+		String strQuery = "Select * from " + sheetName + " WHERE TestCaseID = '" + TestCaseID+"'";
 		System.out.println(strQuery);
 		Recordset Recordset = CommonMethods.createExcelRecordset(strQuery, InputDataSheetPath);
 		return Recordset;

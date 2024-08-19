@@ -59,7 +59,7 @@ public class BrowserLaunch extends ExcelUtil{
 			if (headless) {
 				edgeOptions.addArguments("--headless");
 			}
-			edgeOptions.addArguments("--inprivate");
+//			edgeOptions.addArguments("--inprivate");
 			driver = new EdgeDriver(edgeOptions);
 			break;
 

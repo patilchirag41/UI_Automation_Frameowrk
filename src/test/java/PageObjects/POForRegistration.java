@@ -15,6 +15,6 @@ public interface POForRegistration {
     By PASSWORD = By.xpath("//*[@id='customer.password']");
     By CONFIRM_PASSWORD = By.xpath("//*[@id='repeatedPassword']");
     By REGISTER_BUTTON = By.xpath("//input[@value='Register']");
-    By CONFIRMATION_MESSAGE = By.xpath("//h1[@class='title' and contains(text(), 'Welcome')]");
+    By CONFIRMATION_MESSAGE = By.xpath("//*[@id=\"rightPanel\"]/p");
     By ERROR_MESSAGE = By.xpath("//span[@class='error']");
 }

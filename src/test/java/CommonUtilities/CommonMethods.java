@@ -19,7 +19,7 @@ public class CommonMethods {
 
 	    //static method to get a property value
 	    public static String getProperty(String propertiesFile,String propertyName) {
-		 String  path = System.getProperty("user.dir")+"src/test/resources/Configuration/"+propertiesFile+".properties";
+		 String  path = System.getProperty("user.dir")+"\\src\\test\\resources\\Configuration\\"+propertiesFile+".properties";
 	      loadProperties(path);
 	     String property =  properties.getProperty(propertyName);
 	     return property;

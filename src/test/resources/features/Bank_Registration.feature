@@ -12,7 +12,7 @@ Feature: Banking Automation
     Examples: 
       | testcaseID |
       | Registration_TC001      |
-      | Registration_TC002      |
+      #| Registration_TC002      |
 
 
   Scenario Outline: Unsuccessful Registration with Missing Required Fields

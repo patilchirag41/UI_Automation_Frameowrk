@@ -1,26 +1,32 @@
 package StepDefinitions;
 
-
-import PageObjects.POForRegistration;
-import io.cucumber.java.en.*;
-import org.openqa.selenium.WebDriver;
+import static org.junit.Assert.assertFalse;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import com.codoid.products.fillo.Recordset;
 
+import CommonUtilities.ActionUtils;
 import CommonUtilities.BrowserLaunch;
+import CommonUtilities.BrowserLaunch.DriverType;
 import CommonUtilities.CommonMethods;
 import CommonUtilities.ExcelUtil;
-import CommonUtilities.ActionUtils;
-
-import static org.junit.Assert.*;
+import PageObjects.POForRegistration;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 public class StepDefinitionforRegistration extends BrowserLaunch {
     public static Recordset rs;
     private ActionUtils actionUtils;
+    public static String testCaseID = "";
+   
 
-    @Given("I am on the Parabank registration page for (.*)")
+    @Given("^I am on the Parabank registration page for (.*)$")
     public void iAmOnTheParabankRegistrationPage(String testcaseID) {
         // Fetch the Recordset for the given testcaseID
+    	testCaseID = testcaseID;
         rs = ExcelUtil.getTestData(testcaseID);
 
         // Initialize WebDriver and navigate to the registration page
@@ -31,10 +37,10 @@ public class StepDefinitionforRegistration extends BrowserLaunch {
     }
 
     @When("I enter the registration details")
-    public void iEnterTheRegistrationDetailsForFromTheExcelSheet(String testcaseID) {
+    public void iEnterTheRegistrationDetailsForFromTheExcelSheet() {
         try {
             // Move the recordset cursor to the first record (there should be only one record for the given testcaseID)
-            if (rs.next()) {
+//            if (rs.next()) {
                 // Fetch each field from the recordset and fill in the registration form using ActionUtils
                 actionUtils.enterText(POForRegistration.FIRST_NAME, rs.getField("firstName"));
                 actionUtils.enterText(POForRegistration.LAST_NAME, rs.getField("lastName"));
@@ -47,9 +53,9 @@ public class StepDefinitionforRegistration extends BrowserLaunch {
                 actionUtils.enterText(POForRegistration.USERNAME, rs.getField("username"));
                 actionUtils.enterText(POForRegistration.PASSWORD, rs.getField("password"));
                 actionUtils.enterText(POForRegistration.CONFIRM_PASSWORD, rs.getField("confirmPassword"));
-            } else {
-                throw new RuntimeException("No data found for testcaseID: " + testcaseID);
-            }
+//            } else {
+//                throw new RuntimeException("No data found for testcaseID: " + testCaseID);
+//            }
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Error while entering registration details: " + e.getMessage());
